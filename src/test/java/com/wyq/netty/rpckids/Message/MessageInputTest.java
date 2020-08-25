@@ -25,9 +25,9 @@ public class MessageInputTest {
     @Test
     public void getPeople() {
 
-//        people p = new people("wang",1234);
-//        String s = JSONObject.toJSONString(p);
-//        System.out.println(s);
+        people p = new people("wang",1234);
+        String s = JSONObject.toJSONString(p);
+        System.out.println(s);
         MessageInput messageInput = new MessageInput("123","test","{\"id\":1234,\"name\":\"wang\"}");
         people p1 = messageInput.getPeople(people.class);
         System.out.println(p1.name);

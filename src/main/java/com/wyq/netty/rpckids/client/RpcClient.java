@@ -1,5 +1,6 @@
 package com.wyq.netty.rpckids.client;
 
+import com.wyq.netty.rpckids.Message.MessageInput;
 import com.wyq.netty.rpckids.Message.MessageOutput;
 import com.wyq.netty.rpckids.Message.RequestId;
 import io.netty.bootstrap.Bootstrap;
@@ -23,8 +24,7 @@ public class RpcClient {
         Bootstrap bootstrap = new Bootstrap();
         EventLoopGroup client =  new NioEventLoopGroup();
         String requestId = RequestId.next();//随机uid
-        MessageOutput output = new MessageOutput(requestId, "getRankEmail",
-                "");
+        MessageInput input = new MessageInput(requestId,"getRankEmail","{\"id\":1234,\"name\":\"wang\"}");
 
         try{
             //client需要bootstrap eventgroop
@@ -34,7 +34,7 @@ public class RpcClient {
 
             Channel channel = bootstrap.connect(ip, port).syncUninterruptibly().channel();//暂时不考虑重连
             bootstrap.option(ChannelOption.TCP_NODELAY, true).option(ChannelOption.SO_KEEPALIVE, true);//tcp 以及 长连接(心跳包)
-            channel.writeAndFlush(output);
+            channel.writeAndFlush(input);
 
         }catch (Exception e){
             e.printStackTrace();

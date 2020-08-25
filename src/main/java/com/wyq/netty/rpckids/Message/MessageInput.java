@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class MessageInput {
 
+
     private String requestId;
     private String type;
     private String  peopleString ;
